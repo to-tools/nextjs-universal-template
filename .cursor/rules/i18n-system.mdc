@@ -1,0 +1,291 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 国际化 (i18n) 系统
+
+## 支持的语言
+项目支持5种语言，包含URL路径映射和内部语言代码：
+- **简体中文**: `zh` (URL) → `zh-CN` (内部) - 默认语言
+- **英语**: `en` (URL) → `en-US` (内部) - 回退语言
+- **日语**: `ja` (URL) → `ja-JP` (内部)
+- **韩语**: `ko` (URL) → `ko-KR` (内部)
+- **法语**: `fr` (URL) → `fr-FR` (内部)
+
+## 核心配置文件
+
+### 主要配置
+- [`src/lib/i18n/i18n-config.ts`](mdc:src/lib/i18n/i18n-config.ts) - 核心i18n配置、类型定义和语言映射
+- [`src/lib/i18n/i18n-utils.ts`](mdc:src/lib/i18n/i18n-utils.ts) - 翻译工具函数、插值处理、复数规则
+- [`src/lib/i18n/i18n-context.tsx`](mdc:src/lib/i18n/i18n-context.tsx) - React Context、Provider和Hooks
+- [`src/lib/i18n/url-utils.ts`](mdc:src/lib/i18n/url-utils.ts) - URL处理和路由工具
+- [`src/lib/i18n/index.ts`](mdc:src/lib/i18n/index.ts) - 统一导出
+
+### 翻译文件
+- [`src/lib/i18n/locales/`](mdc:src/lib/i18n/locales) - TypeScript翻译文件目录
+  - `zh-CN.ts` - 简体中文翻译
+  - `en-US.ts` - 英语翻译 
+  - `ja-JP.ts` - 日语翻译
+  - `ko-KR.ts` - 韩语翻译
+  - `fr-FR.ts` - 法语翻译
+
+## 路由结构
+所有页面遵循模式: `/[lang]/page-name`
+- 示例: `/zh/about`, `/en/privacy`, `/ja/terms`
+- 中间件处理语言检测和重定向 ([`middleware.ts`](mdc:middleware.ts))
+- `[lang]` 参数通过 `PATH_LANGUAGE_MAP` 映射到内部语言代码
+
+## 使用模式
+
+### 服务端组件
+```typescript
+import { loadTranslationsForSSR } from '@/lib/i18n/i18n-utils';
+import { mapPathToLocale } from '@/lib/i18n/url-utils';
+
+export default async function Page({ params: { lang } }: { params: { lang: string } }) {
+  const locale = mapPathToLocale(lang);
+  const translations = await loadTranslationsForSSR(locale);
+
+  return <div>{translations.common.loading}</div>;
+}
+```
+
+### 客户端组件
+```typescript
+'use client';
+import { useI18n, useTranslation } from '@/lib/i18n';
+
+function MyComponent() {
+  const { locale, setLocale, languages, isLoading } = useI18n();
+  const { t } = useTranslation();
+  
+  return (
+    <div>
+      <p>{t('common.loading')}</p>
+      <p>{t('footer.description')}</p>
+    </div>
+  );
+}
+```
+
+### 语言切换
+```typescript
+const { setLocale } = useI18n();
+
+// 切换到指定语言并重定向
+setLocale('en-US', true);
+
+// 仅切换语言，不重定向
+setLocale('ja-JP', false);
+```
+
+## 翻译文件结构
+每个 TypeScript 文件导出 `TranslationFile` 类型的对象，支持嵌套键和复数形式：
+
+```typescript
+export const zhCN: TranslationFile = {
+  // SEO 元数据
+  seo: {
+    siteName: 'Next.js 通用模板',
+    pages: {
+      home: {
+        title: '主页标题',
+        description: '主页描述'
+      }
+    }
+  },
+  
+  // 通用文本
+  common: {
+    loading: '加载中...',
+    save: '保存'
+  },
+  
+  // 页面内容
+  pages: {
+    home: {
+      features: {
+        i18n: {
+          title: '国际化',
+          desc: '支持多语言'
+        }
+      }
+    }
+  }
+};
+```
+
+## 高级功能
+
+### 字符串插值
+```typescript
+// 模板: "显示最近 {{current}} 个项目 (共 {{total}} 个)"
+const text = t('someKey', { current: 10, total: 100 });
+```
+
+### 复数处理
+```typescript
+// 自动根据count选择合适的复数形式
+const countText = t('items', { count: 5 }); // "5 个项目"
+```
+
+### 语言检测
+- 自动检测浏览器语言偏好
+- Cookie和localStorage持久化用户选择
+- 中间件处理路由重定向
+
+### 类型安全
+- 完整的TypeScript类型定义
+- 编译时翻译键检查
+- 参数类型验证
+
+## 持久化存储
+- **Cookie**: `preferred-language` 用于SSR和中间件
+- **localStorage**: `LOCALE_STORAGE_KEY` 用于客户端状态
+- **URL路径**: 语言代码嵌入在路由中
+# 国际化 (i18n) 系统
+
+## 支持的语言
+项目支持5种语言，包含URL路径映射和内部语言代码：
+- **简体中文**: `zh` (URL) → `zh-CN` (内部) - 默认语言
+- **英语**: `en` (URL) → `en-US` (内部) - 回退语言
+- **日语**: `ja` (URL) → `ja-JP` (内部)
+- **韩语**: `ko` (URL) → `ko-KR` (内部)
+- **法语**: `fr` (URL) → `fr-FR` (内部)
+
+## 核心配置文件
+
+### 主要配置
+- [`src/lib/i18n/i18n-config.ts`](mdc:src/lib/i18n/i18n-config.ts) - 核心i18n配置、类型定义和语言映射
+- [`src/lib/i18n/i18n-utils.ts`](mdc:src/lib/i18n/i18n-utils.ts) - 翻译工具函数、插值处理、复数规则
+- [`src/lib/i18n/i18n-context.tsx`](mdc:src/lib/i18n/i18n-context.tsx) - React Context、Provider和Hooks
+- [`src/lib/i18n/url-utils.ts`](mdc:src/lib/i18n/url-utils.ts) - URL处理和路由工具
+- [`src/lib/i18n/index.ts`](mdc:src/lib/i18n/index.ts) - 统一导出
+
+### 翻译文件
+- [`src/lib/i18n/locales/`](mdc:src/lib/i18n/locales) - TypeScript翻译文件目录
+  - `zh-CN.ts` - 简体中文翻译
+  - `en-US.ts` - 英语翻译 
+  - `ja-JP.ts` - 日语翻译
+  - `ko-KR.ts` - 韩语翻译
+  - `fr-FR.ts` - 法语翻译
+
+## 路由结构
+所有页面遵循模式: `/[lang]/page-name`
+- 示例: `/zh/emojis`, `/en/gallery`, `/ja/about`
+- 中间件处理语言检测和重定向 ([`middleware.ts`](mdc:middleware.ts))
+- `[lang]` 参数通过 `PATH_LANGUAGE_MAP` 映射到内部语言代码
+
+## 使用模式
+
+### 服务端组件
+```typescript
+import { loadTranslationsForSSR } from '@/lib/i18n/i18n-utils';
+import { mapPathToLocale } from '@/lib/i18n/url-utils';
+
+export default async function Page({ params: { lang } }: { params: { lang: string } }) {
+  const locale = mapPathToLocale(lang);
+const translations = await loadTranslationsForSSR(locale);
+
+  return <div>{translations.common.loading}</div>;
+}
+```
+
+### 客户端组件
+```typescript
+'use client';
+import { useI18n, useTranslation } from '@/lib/i18n';
+
+function MyComponent() {
+  const { locale, setLocale, languages, isLoading } = useI18n();
+  const { t } = useTranslation();
+  
+  return (
+    <div>
+      <p>{t('common.loading')}</p>
+      <p>{t('emojiGenerator.history.showing', { current: 10, total: 100 })}</p>
+    </div>
+  );
+}
+```
+
+### 语言切换
+```typescript
+const { setLocale } = useI18n();
+
+// 切换到指定语言并重定向
+setLocale('en-US', true);
+
+// 仅切换语言，不重定向
+setLocale('ja-JP', false);
+```
+
+## 翻译文件结构
+每个 TypeScript 文件导出 `TranslationFile` 类型的对象，支持嵌套键和复数形式：
+
+```typescript
+export const zhCN: TranslationFile = {
+  // SEO 元数据
+  seo: {
+    siteName: '随机表情符号生成器',
+    pages: {
+      home: {
+        title: '主页标题',
+        description: '主页描述'
+      }
+    }
+  },
+  
+  // 通用文本
+  common: {
+    loading: '加载中...',
+    save: '保存',
+    contact: {
+      email: '邮箱',
+      website: '网站'
+    }
+  },
+  
+  // 复数支持
+  pluralExample: {
+    zero: '没有项目',
+    one: '一个项目', 
+    other: '{{count}} 个项目'
+  }
+};
+```
+
+## 高级功能
+
+### 字符串插值
+```typescript
+// 模板: "显示最近 {{current}} 个表情 (共 {{total}} 个)"
+const text = t('emojiGenerator.history.showing', { current: 10, total: 100 });
+```
+
+### 复数处理
+```typescript
+// 自动根据count选择合适的复数形式
+const countText = t('items', { count: 5 }); // "5 个项目"
+```
+
+### 语言检测
+- 自动检测浏览器语言偏好
+- Cookie和localStorage持久化用户选择
+- 中间件处理路由重定向
+
+### 类型安全
+- 完整的TypeScript类型定义
+- 编译时翻译键检查
+- 参数类型验证
+
+## 持久化存储
+- **Cookie**: `preferred-language` 用于SSR和中间件
+- **localStorage**: `LOCALE_STORAGE_KEY` 用于客户端状态
+- **URL路径**: 语言代码嵌入在路由中
+
+## 开发调试
+- 开发模式下自动验证翻译完整性
+- 缺失翻译键的控制台警告
+- 翻译文件动态加载和热重载

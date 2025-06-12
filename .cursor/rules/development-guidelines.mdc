@@ -1,0 +1,103 @@
+# 开发指南和最佳实践
+
+## 代码规范
+
+### TypeScript 使用
+# 开发指南和最佳实践
+
+## 代码规范
+
+### TypeScript 使用
+- 所有新文件必须使用 TypeScript
+- 严格的类型定义，避免使用 `any`
+- 使用接口(Interface)定义组件Props和数据结构
+- 导出类型定义以便复用
+
+### 组件开发
+```tsx
+// 推荐的组件结构
+interface ComponentProps {
+  // 明确的类型定义
+}
+
+export function Component({ prop1, prop2 }: ComponentProps) {
+  // 组件逻辑
+  return (
+    // JSX
+  );
+}
+```
+
+### 文件命名规范
+- 组件文件: `PascalCase.tsx` (如 `UserProfile.tsx`)
+- 工具文件: `kebab-case.ts` (如 `user-utils.ts`)
+- 配置文件: `kebab-case.ts` (如 `i18n-config.ts`)
+- 页面文件: `page.tsx`, `layout.tsx`, `not-found.tsx`
+
+## 项目架构原则
+
+### 服务端 vs 客户端组件
+- 默认使用服务端组件 (RSC)
+- 仅在需要交互、状态或浏览器API时使用 `'use client'`
+- 客户端组件文件以 `Client.tsx` 结尾
+
+### 状态管理
+- 优先使用 React 内置状态管理 (useState, useContext)
+- 全局状态使用 Context API (主题、国际化)
+- 本地存储使用自定义 hooks
+
+### 样式系统
+- 使用 Tailwind CSS 进行样式开发
+- 基于 CSS 变量的主题系统
+- 响应式设计遵循移动优先原则
+
+## 性能优化
+
+### 代码分割
+- 路由级别的代码分割 (App Router 自动处理)
+- 动态导入大型组件或库
+- 懒加载非关键功能
+
+### 图片和资源
+- 使用 Next.js Image 组件优化图片
+- 静态资源放在 [`public/`](mdc:public) 目录
+- 图标使用 SVG 格式
+
+### 缓存策略
+- 静态页面启用 ISR (Incremental Static Regeneration)
+- API 路由合理设置缓存头
+- 客户端数据使用适当的缓存策略
+
+## 国际化最佳实践
+
+### 翻译管理
+- 所有用户可见文本必须国际化
+- 使用嵌套的翻译键结构
+- 保持各语言翻译文件同步
+
+### 路由处理
+- 遵循 `/[lang]/` 路由模式
+- 中间件处理语言检测和重定向
+- 确保所有页面支持多语言
+
+## 部署和构建
+
+### 环境配置
+- 区分开发、预览和生产环境
+- 环境变量使用 `.env.local` (本地) 和平台配置 (生产)
+- Cloudflare 和 Vercel 双平台支持
+
+### 构建优化
+- 启用 Turbopack 加速开发构建
+- 生产构建使用静态优化
+- Bundle 分析和大小监控
+
+## 测试策略
+- 组件测试使用 React Testing Library
+- E2E 测试覆盖关键用户流程
+- 国际化和主题切换的测试覆盖
+
+## Git 工作流
+- 功能分支开发
+- 提交信息使用约定式提交格式
+- Pull Request 必须通过代码审查

@@ -1,0 +1,69 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 主题系统架构
+
+## 概述
+项目采用基于 CSS 变量的动态主题系统，支持浅色模式、深色模式和跟随系统设置。
+
+## 核心文件
+
+### 主题配置
+- [`src/lib/themes/theme-config.ts`](mdc:src/lib/themes/theme-config.ts) - 主题颜色定义和配置
+- [`src/lib/themes/theme-context.tsx`](mdc:src/lib/themes/theme-context.tsx) - React Context 和 Hooks
+- [`src/lib/themes/theme-utils.ts`](mdc:src/lib/themes/theme-utils.ts) - 工具函数和类型定义
+
+### UI 组件
+- [`src/components/theme/`](mdc:src/components/theme) - 主题切换组件目录
+
+## 使用模式
+
+### 主题Provider
+```tsx
+// 在根布局中集成
+<ThemeProvider defaultMode="system" storageKey="nextjs-theme">
+  {children}
+</ThemeProvider>
+```
+
+### 主题Hook
+```tsx
+// 在组件中使用
+const { theme, mode, setTheme, setMode, toggleTheme } = useTheme();
+```
+
+### CSS变量
+```css
+/* 在样式中使用主题变量 */
+.my-component {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+```
+
+### Tailwind类名
+```tsx
+// 在组件中使用预定义的主题类
+<div className="bg-background text-foreground border-border">
+  <button className="bg-primary text-primary-foreground">按钮</button>
+</div>
+```
+
+## 颜色系统
+- **基础色**: background, foreground, card, card-foreground
+- **主要色**: primary, primary-foreground, secondary, secondary-foreground  
+- **状态色**: destructive, destructive-foreground, success, warning
+- **UI元素**: muted, muted-foreground, accent, border, input, ring
+
+## 存储和持久化
+- 使用 localStorage 保存用户主题偏好
+- 支持 SSR 和水合过程中的主题同步
+- 自动检测系统主题变化
+
+## 主题切换组件
+- 支持切换浅色/深色/系统模式
+- 响应式图标和状态显示
+- 与国际化系统完整集成

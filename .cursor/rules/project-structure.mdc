@@ -1,0 +1,46 @@
+# 项目结构指南
+
+## 项目概述
+这是一个通用的Next.js 15+模板项目，使用 App Router，支持国际化、主题切换和多平台部署。
+
+# 项目结构指南
+
+## 项目概述
+这是一个通用的Next.js 15+模板项目，使用 App Router，支持国际化、主题切换和多平台部署。
+
+## 核心技术栈
+- **框架**: Next.js 15.3.2 (App Router)
+- **语言**: TypeScript 5
+- **样式**: Tailwind CSS 4
+- **部署**: Cloudflare Pages & Vercel
+- **构建工具**: Turbopack (开发环境)
+
+## 目录结构
+
+### 应用目录 (`src/app/`)
+- [`src/app/layout.tsx`](mdc:src/app/layout.tsx) - 根布局文件
+- [`src/app/page.tsx`](mdc:src/app/page.tsx) - 主页重定向
+- [`src/app/[lang]/`](mdc:src/app/[lang]) - 国际化路由目录
+- [`src/app/globals.css`](mdc:src/app/globals.css) - 全局样式和CSS变量
+- [`src/app/not-found.tsx`](mdc:src/app/not-found.tsx) - 404页面
+
+### 组件目录 (`src/components/`)
+- 布局组件: [`Header.tsx`](mdc:src/components/Header.tsx), [`Footer.tsx`](mdc:src/components/Footer.tsx)
+- 专用功能: [`components/i18n/`](mdc:src/components/i18n), [`components/theme/`](mdc:src/components/theme)
+
+### 核心库 (`src/lib/`)
+- **国际化**: [`src/lib/i18n/`](mdc:src/lib/i18n) - i18n配置和工具
+- **主题系统**: [`src/lib/themes/`](mdc:src/lib/themes) - 主题切换逻辑
+
+## 关键配置文件
+- [`package.json`](mdc:package.json) - 项目依赖和脚本
+- [`next.config.ts`](mdc:next.config.ts) - Next.js配置
+- [`middleware.ts`](mdc:middleware.ts) - 路由中间件
+- [`tsconfig.json`](mdc:tsconfig.json) - TypeScript配置
+- [`wrangler.jsonc`](mdc:wrangler.jsonc) - Cloudflare配置
+
+## 开发命令
+- `npm run dev` - 启动开发服务器 (Turbopack, 端口3001)
+- `npm run build` - 构建生产版本
+- `npm run preview` - Cloudflare Pages本地预览
+- `npm run deploy` - 部署到Cloudflare Pages
