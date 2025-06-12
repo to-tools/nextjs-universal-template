@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/lib/themes/theme-context';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nextjs-universal-template.com'),
+  metadataBase: new URL('https://nextjs-universal-template.to-tools.com'),
   title: {
     template: '%s | Universal Template',
     default: 'Universal Template - Next.js Starter',

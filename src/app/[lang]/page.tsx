@@ -135,7 +135,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return (value as string) || key;
   };
   
-  const baseUrl = 'https://nextjs-universal-template.com';
+  const baseUrl = 'https://nextjs-universal-template.to-tools.com';
   const logoUrl = `${baseUrl}/logo-128.svg`;
   
   return {

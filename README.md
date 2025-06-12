@@ -326,4 +326,4 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 ⭐ 如果这个模板对你有帮助，请给个 Star 支持一下！
 
-🔗 [在线演示](https://nextjs-universal-template.com) | [问题反馈](https://github.com/to-tools/nextjs-universal-template/issues) | [功能建议](https://github.com/to-tools/nextjs-universal-template/discussions)
+🔗 [在线演示](https://nextjs-universal-template.to-tools.com) | [问题反馈](https://github.com/to-tools/nextjs-universal-template/issues) | [功能建议](https://github.com/to-tools/nextjs-universal-template/discussions)

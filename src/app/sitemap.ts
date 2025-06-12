@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 
-const baseUrl = 'https://nextjs-universal-template.com';
+const baseUrl = 'https://nextjs-universal-template.to-tools.com';
 const languages = ['zh', 'en', 'ja', 'ko', 'fr'];
 const pages = ['', 'about', 'privacy', 'terms'];
 

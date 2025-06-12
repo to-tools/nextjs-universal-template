@@ -9,7 +9,7 @@ import { Metadata } from 'next';
 
 // 根路径SEO元数据
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nextjs-universal-template.com'),
+  metadataBase: new URL('https://nextjs-universal-template.to-tools.com'),
   title: 'Next.js Universal Template - Modern Web Development Starter',
   description: 'A feature-complete Next.js template with internationalization, theme system, performance optimization and modern development tools. Start your project quickly with this production-ready template.',
   keywords: 'nextjs,template,starter,i18n,internationalization,theme system,typescript,tailwind css,web development,react',
@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     siteName: 'Next.js Universal Template',
     title: 'Next.js Universal Template - Modern Web Development Starter',
     description: 'A feature-complete Next.js template with internationalization, theme system, and modern development tools.',
-    url: 'https://nextjs-universal-template.com',
+    url: 'https://nextjs-universal-template.to-tools.com',
     locale: 'en_US',
     images: [
       {
-        url: 'https://nextjs-universal-template.com/logo-128.svg',
+        url: 'https://nextjs-universal-template.to-tools.com/logo-128.svg',
         width: 128,
         height: 128,
         alt: 'Universal Template Logo',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Next.js Universal Template - Modern Web Development Starter',
     description: 'A feature-complete Next.js template with internationalization, theme system, and modern development tools.',
-    images: ['https://nextjs-universal-template.com/logo-128.svg'],
+    images: ['https://nextjs-universal-template.to-tools.com/logo-128.svg'],
   },
   robots: {
     index: true,
@@ -50,14 +50,14 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://nextjs-universal-template.com',
+    canonical: 'https://nextjs-universal-template.to-tools.com',
     languages: {
-      'zh-CN': 'https://nextjs-universal-template.com/zh',
-      'en-US': 'https://nextjs-universal-template.com/en',
-      'ja-JP': 'https://nextjs-universal-template.com/ja',
-      'ko-KR': 'https://nextjs-universal-template.com/ko',
-      'fr-FR': 'https://nextjs-universal-template.com/fr',
-      'x-default': 'https://nextjs-universal-template.com',
+      'zh-CN': 'https://nextjs-universal-template.to-tools.com/zh',
+      'en-US': 'https://nextjs-universal-template.to-tools.com/en',
+      'ja-JP': 'https://nextjs-universal-template.to-tools.com/ja',
+      'ko-KR': 'https://nextjs-universal-template.to-tools.com/ko',
+      'fr-FR': 'https://nextjs-universal-template.to-tools.com/fr',
+      'x-default': 'https://nextjs-universal-template.to-tools.com',
     },
   },
   icons: {
